@@ -1,25 +1,25 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, 'Please tell us your name!']
+    required: [true, 'Please tell us your name!'],
   },
   email: {
     type: String,
     required: [true, 'Please provide your email'],
     unique: true,
     lowercase: true,
-    validate: [validator.isEmail, 'Please provide a valid email']
+    validate: [validator.isEmail, 'Please provide a valid email'],
   },
   photo: String,
   password: {
     type: String,
     required: [true, 'Please provide a password'],
     minlength: 8,
-    select: false
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -27,14 +27,14 @@ const userSchema = new mongoose.Schema({
     validate: {
       // this only works on SAVE
       validator(el) {
-        return el === this.password
+        return el === this.password;
       },
-      message: 'Passwords do not match!'
-    }
-  }
+      message: 'Passwords do not match!',
+    },
+  },
 });
 
-userSchema.pre('save', async function(next) {
+userSchema.pre('save', async function (next) {
   // only run this function if password was actually modified
   if (!this.isModified('password')) return next();
 
@@ -46,9 +46,12 @@ userSchema.pre('save', async function(next) {
   return next();
 });
 
-userSchema.methods.correctPassword = function(candidatePassword, userPassword) {
+userSchema.methods.correctPassword = function (
+  candidatePassword,
+  userPassword
+) {
   return bcrypt.compare(candidatePassword, userPassword);
-}
+};
 
 const User = mongoose.model('User', userSchema);
 

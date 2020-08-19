@@ -1,17 +1,17 @@
-/* eslint-disable no-process-exit */
 const fs = require('fs');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-const Tour = require("../../models/tourModel");
+const Tour = require('../../models/tourModel');
 
 dotenv.config({ path: './config.env' });
 
-const DB = process.env.DATABASE
-  .replace('<DB_USERNAME>', process.env.DB_USERNAME)
+const DB = process.env.DATABASE.replace(
+  '<DB_USERNAME>',
+  process.env.DB_USERNAME
+)
   .replace('<DB_PASSWORD>', process.env.DB_PASSWORD)
-  .replace('<DB_CLOUD>', process.env.DB_CLOUD)
-  ;
+  .replace('<DB_CLOUD>', process.env.DB_CLOUD);
 
 mongoose
   .connect(DB, {
@@ -49,11 +49,10 @@ const deleteData = async () => {
   process.exit();
 };
 
-if(process.argv[2] === '--import') {
+if (process.argv[2] === '--import') {
   importData();
-} else if(process.argv[2] === '--delete') {
+} else if (process.argv[2] === '--delete') {
   deleteData();
 }
 
 // console.log(process.argv);
-  

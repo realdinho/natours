@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable no-unused-vars */
 const tour5 = {
   id: 5,
   name: 'The Sports Lover',
