@@ -6,7 +6,8 @@ const router = express.Router();
 
 // router.param('id', tourController.checkId);
 
-router.route('/top-5-cheap')
+router
+  .route('/top-5-cheap')
   .get(tourController.aliasTopTours, tourController.getAllTours);
 
 router.route('/tour-stats').get(tourController.getTourStats);
@@ -21,6 +22,10 @@ router
   .route('/:id')
   .get(tourController.getTour)
   .patch(tourController.updateTour)
-  .delete(tourController.deleteTour);
+  .delete(
+    authController.protect,
+    authController.restrictTo('admin', 'lead-guide'),
+    tourController.deleteTour
+  );
 
 module.exports = router;
