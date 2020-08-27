@@ -2,7 +2,7 @@ const epress = require('express');
 const reviewController = require('../controllers/reviewController');
 const authController = require('../controllers/authController');
 
-const router = epress.Router();
+const router = epress.Router({ mergeParams: true }); // parent parameters
 
 router
   .route('/')
