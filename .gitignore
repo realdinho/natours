@@ -6,6 +6,7 @@ node_modules
 config.env
 .env.local
 .env.*.local
+.cache
 
 # Log files
 npm-debug.log*

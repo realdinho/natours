@@ -3,7 +3,8 @@ html
   head 
     block head
       meta(charset='UTF-8')
-      meta(name='viewport' content='width=device-width, intial-scale=1.0')
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      meta(http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'; connect-src 'self' ws://127.0.0.1:*, img-src 'self'")
       link(rel='stylesheet' href='/css/style.css')
       link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
       link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
@@ -21,6 +22,6 @@ html
     // FOOTER
     include ./common/_footer
 
-    script(src='/js/mapbox.js')   
+    script(src='/bundle.js')   
 
     
