@@ -12,7 +12,14 @@ module.exports = class Email {
 
   newTransport() {
     if (process.env.NODE_ENV === 'production') {
-      return 1;
+      // sendgrid
+      return nodemailer.createTransport({
+        service: 'SendGrid',
+        auth: {
+          user: process.env.SENDGRID_USERNAME,
+          pass: process.env.SENDGRID_PASSWORD,
+        },
+      });
     }
 
     // create a transporter
@@ -29,7 +36,7 @@ module.exports = class Email {
   // send the actual email
   async send(template, subject) {
     // render HTML based on a pug template
-    const html = pug.renderFile(`${__dirname}/../../views/${template}.pug`, {
+    const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`, {
       firstName: this.firstName,
       url: this.url,
       subject,
@@ -50,5 +57,12 @@ module.exports = class Email {
 
   async sendWelcome() {
     await this.send('welcome', 'Welcome to the Natours App!');
+  }
+
+  async sendPasswordReset() {
+    await this.send(
+      'passwordReset',
+      'You password reset token (valid for only 10minutes)'
+    );
   }
 };
