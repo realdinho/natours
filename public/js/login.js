@@ -1,8 +1,8 @@
 /*eslint-disable*/
 import axios from 'axios';
-import { showAlert } from './alert'
+import { showAlert } from './alert';
 
-const urlBase = 'http://127.0.0.1:3000/api/v1'
+const urlBase = 'http://127.0.0.1:3000/api/v1';
 
 export const login = async (email, password) => {
   console.log('LOGIN');
