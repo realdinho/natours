@@ -42,7 +42,6 @@ const sendErrorDev = (err, req, res) => {
 };
 
 const sendErrorProd = (err, req, res) => {
-  console.log(req.originalUrl);
   // API
   if (req.originalUrl.startsWith('/api')) {
     // operation error = trusted error: send message to client

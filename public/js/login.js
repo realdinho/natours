@@ -2,21 +2,17 @@
 import axios from 'axios';
 import { showAlert } from './alert';
 
-const urlBase = 'http://127.0.0.1:3000/api/v1';
-
 export const login = async (email, password) => {
-  console.log('LOGIN');
   console.log(email, password);
   try {
     const res = await axios({
       method: 'POST',
-      url: `${urlBase}/users/login`,
+      url: '/api/v1/users/login',
       data: {
         email,
         password
       }
     });
-    console.log(res);
 
     if(res.data.status === 'success') {
       showAlert('success', 'logged in successfully');
@@ -33,7 +29,7 @@ export const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: `${urlBase}/users/logout`,
+      url: '/api/v1/users/logout',
     });
 
     if (res.data.status = 'success') {
